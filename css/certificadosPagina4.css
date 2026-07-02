@@ -257,28 +257,76 @@ body, html {
     margin-top: 560px; /* coloca o botão FECHAR na margem inferior da Tela, na mesma linha que os Botões */
 }
 
-/* Modo Responsivo */
-@media all and (min-width: 40.063em) and (max-width: 63.938em) { /* Celular com tamanho de Tela Média */
-   body, html {
-        margin: 0; /* zera todas as margens */
-        padding: 0; /* zera todos os espaços dentro da Tela */
-        overflow-y: hidden; /* evita que o conteúdo extrapole as margens */
-        overflow-x: hidden; /* evita que o conteúdo extrapole as margens */
-        margin-top: -50px; /* ajuda o Container ficar centralizado no meio da página */
+/* Modo Responsivo - Feito pelo Gemini */
+/* ==========================================================================
+   Modo Responsivo: Transforma o Carrossel em Touch Nativo e Fluido no Mobile
+   ========================================================================== */
+@media all and (max-width: 63.938em) {
+    body, html {
+        overflow: hidden;
+        height: 100vh;
     }
-    .fechar-pagina { /* apenas no Botão FECHAR da página 4 (CERTIFICADOS) */
-        position: absolute; /* é obrigatório colocar este comando pra poder deixar Responsivo depois 
-                               com "position: relative;" acima */
-        /*padding-top: 860px;*/ /* coloca o botão FECHAR na margem inferior da Tela
-                               na mesma linha que os CERTIFICADOS */
-        margin-right: 450px; /* Era -550px, Era-450px - espaçamento entre o Botão FECHAR e a margem direita da Tela */
-        margin-top: 820px; /* coloca o botão FECHAR na margem inferior da Tela alinhado com CERTIFICADOS */
+
+    .comentario {
+        position: absolute;
+        top: 20px;
+        width: 100%;
+        text-align: center;
+        z-index: 10;
     }
-    fechar-pagina .button-pages {
-        padding: 0;
+
+    /* 1. Transforma o container em uma janela flexível que cabe na tela do celular */
+    .controle-deslizante {
+        width: 95vw !important; /* Ocupa 95% da largura da tela do celular */
+        height: auto !important;
+        max-height: 70vh;
+        border-radius: 12px;
+        overflow-x: auto !important; /* ATIVA O SCROLL HORIZONTAL NATIVO DO CELULAR */
+        scroll-snap-type: x mandatory !important; /* Faz a foto "grudar" certinho ao arrastar */
+        -webkit-overflow-scrolling: touch !important; /* Deixa o deslize super liso no iPhone/Android */
     }
-    manual-botao:hover { /* Era class="manual-btn" */
-        background: #f9004d; /* cor de PREENCHIMENTO que os Botões terão 
-                                quando o mouse clicar sobre os Botões */
+
+    /* 2. Organiza a linha de slides para aceitar o arrasto de dedo */
+    .slides {
+        width: auto !important; /* Reseta os 500% fixos que quebravam o layout */
+        height: auto !important;
+        display: flex !important;
+    }
+
+    /* 3. Força cada slide a ocupar exatamente o tamanho da tela do celular */
+    .slide-carrossel {
+        flex: 0 0 100% !important; /* Cada certificado vira uma "página" única */
+        width: 100% !important;
+        scroll-snap-align: start !important; /* Alinha o início da foto na tela */
+    }
+
+    /* 4. Reseta a margem negativa do primeiro slide para não deslocar as fotos sozinhos */
+    .slide-carrossel.first {
+        margin-left: 0 !important;
+    }
+
+    /* 5. Faz a imagem do certificado se ajustar perfeitamente ao tamanho do celular */
+    .slide-carrossel img {
+        width: 100% !important; /* Ocupa a largura do celular sem distorcer */
+        height: auto !important; /* Mantém a proporção do certificado */
+        pointer-events: auto !important; /* Devolve o controle de toque para o navegador */
+        user-select: none;
+    }
+
+    /* 6. Esconde completamente os botões e rádios (Inúteis no modo touch) */
+    .navegacao-manual, 
+    .navegacao-automatica, 
+    .slides input[type="radio"] {
+        display: none !important;
+    }
+
+    /* 7. Reposiciona o seu botão fechar de forma limpa abaixo do certificado */
+    .fechar-pagina {
+        position: fixed !important;
+        bottom: 30px !important;
+        left: 50% !important;
+        transform: translateX(-50%) !important;
+        margin: 0 !important;
+        z-index: 999;
     }
 }
