@@ -259,34 +259,35 @@ body, html {
 
 /* Modo Responsivo - Feito pelo Gemini */
 /* ==========================================================================
-   Modo Responsivo Corrigido: Texto visível e Botão Fechar no Canto Direito
+   Modo Responsivo: Ajuste Fino de Centralização e Posição do Botão Fechar
    ========================================================================== */
 @media all and (max-width: 63.938em) {
     body, html {
         overflow: hidden;
-        height: 100vh;
+        height: 100vh; /* Garante os 100% da altura da tela */
         display: flex;
-        flex-direction: column; /* Organiza o conteúdo em pilha vertical (Texto -> Carrossel -> Botão) */
-        justify-content: center;
-        align-items: center;
+        flex-direction: column;
+        justify-content: center; /* Força a centralização vertical perfeita no meio da tela */
+        align-items: center;     /* Força a centralização horizontal perfeita */
     }
 
-    /* 1. Garante que a frase orientadora fique visível e centralizada acima do carrossel */
+    /* 1. Frase orientadora centralizada com espaço fixo */
     .comentario {
         position: relative;
-        margin-bottom: 20px; /* Cria um espaço seguro entre o texto e o carrossel */
+        margin-bottom: 25px; /* Espaço perfeito entre o texto e o carrossel */
         width: 100%;
         text-align: center;
         padding: 0 15px;
     }
 
-    /* 2. Janela do carrossel adaptada para o celular */
+    /* 2. Carrossel centralizado ocupando o espaço correto na tela */
     .controle-deslizante {
+        position: relative; /* Base para o botão fechar se posicionar em relação a ele */
         width: 95vw !important;
         height: auto !important;
         max-height: 65vh;
         border-radius: 12px;
-        overflow-x: auto !important; /* Ativa o touch nativo */
+        overflow-x: auto !important; /* Ativa o toque nativo */
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
     }
@@ -321,15 +322,17 @@ body, html {
         display: none !important;
     }
 
-    /* 3. Posiciona o botão FECHAR logo abaixo do carrossel, alinhado no CANTO DIREITO */
+    /* 3. O PULO DO GATO: Botão Fechar absoluto para não espremer o carrossel */
     .fechar-pagina {
-        position: relative !important;
-        align-self: flex-end; /* Empurra o botão para a direita do container */
-        margin-top: 20px !important; /* Espaçamento abaixo da imagem */
-        margin-right: 2.5vw !important; /* Alinha perfeitamente com a borda direita do carrossel (95vw) */
+        position: absolute !important;
+        top: calc(100% + 15px); /* Joga o botão exatamente 15px ABAIXO do carrossel */
+        right: 0 !important; /* Alinha perfeitamente com a borda direita do carrossel */
+        margin: 0 !important;
+        z-index: 999;
+        
+        /* Reseta travas fantasmas do flexbox */
         bottom: auto !important;
         left: auto !important;
         transform: none !important;
-        z-index: 999;
     }
 }
