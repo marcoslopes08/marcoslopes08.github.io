@@ -195,48 +195,35 @@
 	<script>
 	    let toqueInicioX = 0;
 	    let toqueFimX = 0;
-	    const limiteDiferenca = 40; // Um pouco menor para facilitar o teste
+	    const limiteDiferenca = 40; 
 	
 	    function mudarSlide(direcao) {
 	        const radios = document.querySelectorAll('input[name="radio-botao"]');
 	        let indiceAtual = Array.from(radios).findIndex(r => r.checked);
-	        
-	        console.log("Slide atual antes do swipe:", indiceAtual);
 	
 	        if (direcao === 'proximo' && indiceAtual < radios.length - 1) {
 	            radios[indiceAtual + 1].checked = true;
-	            console.log("Mudou para o próximo:", indiceAtual + 1);
 	        } else if (direcao === 'anterior' && indiceAtual > 0) {
 	            radios[indiceAtual - 1].checked = true;
-	            console.log("Voltou para o anterior:", indiceAtual - 1);
 	        }
 	    }
 	
-	    // Ouvinte direto no corpo do carrossel para não ter erro de elemento escondido
-	    const container = document.querySelector('.controle-deslizante');
-	    
-	    if (container) {
-	        console.log("Container do carrossel encontrado com sucesso!");
+	    // O truque máximo: ouvir o toque na janela inteira (window)
+	    window.addEventListener('touchstart', e => {
+	        toqueInicioX = e.changedTouches[0].clientX;
+	    }, { passive: true });
+	
+	    window.addEventListener('touchend', e => {
+	        toqueFimX = e.changedTouches[0].clientX;
 	        
-	        container.addEventListener('touchstart', e => {
-	            toqueInicioX = e.changedTouches[0].clientX;
-	        }, { passive: true });
+	        const dif = toqueInicioX - toqueFimX;
 	
-	        container.addEventListener('touchend', e => {
-	            toqueFimX = e.changedTouches[0].clientX;
-	            
-	            const dif = toqueInicioX - toqueFimX;
-	            console.log("Diferença do arrasto de dedo:", dif);
-	
-	            if (dif > limiteDiferenca) {
-	                mudarSlide('proximo');
-	            } else if (dif < -limiteDiferenca) {
-	                mudarSlide('anterior');
-	            }
-	        }, { passive: true });
-	    } else {
-	        console.log("ERRO: A classe .controle-deslizante não foi encontrada no HTML!");
-	    }
+	        if (dif > limiteDiferenca) {
+	            mudarSlide('proximo');
+	        } else if (dif < -limiteDiferenca) {
+	            mudarSlide('anterior');
+	        }
+	    }, { passive: true });
 	</script>
     
 </body>
