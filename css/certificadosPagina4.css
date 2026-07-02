@@ -259,74 +259,77 @@ body, html {
 
 /* Modo Responsivo - Feito pelo Gemini */
 /* ==========================================================================
-   Modo Responsivo: Transforma o Carrossel em Touch Nativo e Fluido no Mobile
+   Modo Responsivo Corrigido: Texto visível e Botão Fechar no Canto Direito
    ========================================================================== */
 @media all and (max-width: 63.938em) {
     body, html {
         overflow: hidden;
         height: 100vh;
+        display: flex;
+        flex-direction: column; /* Organiza o conteúdo em pilha vertical (Texto -> Carrossel -> Botão) */
+        justify-content: center;
+        align-items: center;
     }
 
+    /* 1. Garante que a frase orientadora fique visível e centralizada acima do carrossel */
     .comentario {
-        position: absolute;
-        top: 20px;
+        position: relative;
+        margin-bottom: 20px; /* Cria um espaço seguro entre o texto e o carrossel */
         width: 100%;
         text-align: center;
-        z-index: 10;
+        padding: 0 15px;
     }
 
-    /* 1. Transforma o container em uma janela flexível que cabe na tela do celular */
+    /* 2. Janela do carrossel adaptada para o celular */
     .controle-deslizante {
-        width: 95vw !important; /* Ocupa 95% da largura da tela do celular */
+        width: 95vw !important;
         height: auto !important;
-        max-height: 70vh;
+        max-height: 65vh;
         border-radius: 12px;
-        overflow-x: auto !important; /* ATIVA O SCROLL HORIZONTAL NATIVO DO CELULAR */
-        scroll-snap-type: x mandatory !important; /* Faz a foto "grudar" certinho ao arrastar */
-        -webkit-overflow-scrolling: touch !important; /* Deixa o deslize super liso no iPhone/Android */
+        overflow-x: auto !important; /* Ativa o touch nativo */
+        scroll-snap-type: x mandatory !important;
+        -webkit-overflow-scrolling: touch !important;
     }
 
-    /* 2. Organiza a linha de slides para aceitar o arrasto de dedo */
     .slides {
-        width: auto !important; /* Reseta os 500% fixos que quebravam o layout */
+        width: auto !important;
         height: auto !important;
         display: flex !important;
     }
 
-    /* 3. Força cada slide a ocupar exatamente o tamanho da tela do celular */
     .slide-carrossel {
-        flex: 0 0 100% !important; /* Cada certificado vira uma "página" única */
+        flex: 0 0 100% !important;
         width: 100% !important;
-        scroll-snap-align: start !important; /* Alinha o início da foto na tela */
+        scroll-snap-align: start !important;
     }
 
-    /* 4. Reseta a margem negativa do primeiro slide para não deslocar as fotos sozinhos */
     .slide-carrossel.first {
         margin-left: 0 !important;
     }
 
-    /* 5. Faz a imagem do certificado se ajustar perfeitamente ao tamanho do celular */
     .slide-carrossel img {
-        width: 100% !important; /* Ocupa a largura do celular sem distorcer */
-        height: auto !important; /* Mantém a proporção do certificado */
-        pointer-events: auto !important; /* Devolve o controle de toque para o navegador */
+        width: 100% !important;
+        height: auto !important;
+        pointer-events: auto !important;
         user-select: none;
     }
 
-    /* 6. Esconde completamente os botões e rádios (Inúteis no modo touch) */
+    /* Esconde as bolinhas de navegação no mobile */
     .navegacao-manual, 
     .navegacao-automatica, 
     .slides input[type="radio"] {
         display: none !important;
     }
 
-    /* 7. Reposiciona o seu botão fechar de forma limpa abaixo do certificado */
+    /* 3. Posiciona o botão FECHAR logo abaixo do carrossel, alinhado no CANTO DIREITO */
     .fechar-pagina {
-        position: fixed !important;
-        bottom: 30px !important;
-        left: 50% !important;
-        transform: translateX(-50%) !important;
-        margin: 0 !important;
+        position: relative !important;
+        align-self: flex-end; /* Empurra o botão para a direita do container */
+        margin-top: 20px !important; /* Espaçamento abaixo da imagem */
+        margin-right: 2.5vw !important; /* Alinha perfeitamente com a borda direita do carrossel (95vw) */
+        bottom: auto !important;
+        left: auto !important;
+        transform: none !important;
         z-index: 999;
     }
 }
