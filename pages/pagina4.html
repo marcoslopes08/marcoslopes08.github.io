@@ -192,41 +192,38 @@
 
     <!-- JavaScript para detectar Touch Screen no Mobile, modo responsivo -->
     <!-- JavaScript para fazer o Swipe (Deslizar com o dedo) funcionar no Mobile - Feito pelo Gemini -->
-	<script>
-	    const slider = document.querySelector('.controle-deslizante');
+		<script>
 	    let toqueInicioX = 0;
 	    let toqueFimX = 0;
+	    const limiteDiferenca = 50; // Distância mínima do deslize
 	
-	    // Captura onde o dedo encostou na tela
-	    slider.addEventListener('touchstart', e => {
-	        toqueInicioX = e.changedTouches[0].screenX;
-	    }, { passive: true });
-	
-	    // Captura onde o dedo saiu da tela e calcula o movimento
-	    slider.addEventListener('touchend', e => {
-	        toqueFimX = e.changedTouches[0].screenX;
-	        verificarDeslize();
-	    }, { passive: true });
-	
-	    function verificarDeslize() {
-	        const limiteDiferenca = 50; // Quantidade de pixels mínima para considerar um deslize
+	    function mudarSlide(direcao) {
 	        const radios = document.querySelectorAll('input[name="radio-botao"]');
 	        let indiceAtual = Array.from(radios).findIndex(r => r.checked);
 	
-	        // Deslizou para a Esquerda (Avançar Slide)
-	        if (toqueInicioX - toqueFimX > limiteDiferenca) {
-	            if (indiceAtual < radios.length - 1) {
-	                radios[indiceAtual + 1].checked = true;
-	            }
-	        }
-	        
-	        // Deslizou para a Direita (Voltar Slide)
-	        if (toqueFimX - toqueInicioX > limiteDiferenca) {
-	            if (indiceAtual > 0) {
-	                radios[indiceAtual - 1].checked = true;
-	            }
+	        if (direcao === 'proximo' && indiceAtual < radios.length - 1) {
+	            radios[indiceAtual + 1].checked = true;
+	        } else if (direcao === 'anterior' && indiceAtual > 0) {
+	            radios[indiceAtual - 1].checked = true;
 	        }
 	    }
+	
+	    // Aplica os ouvintes de toque em cada slide individualmente
+	    document.querySelectorAll('.slide-carrossel').forEach(slide => {
+	        slide.addEventListener('touchstart', e => {
+	            toqueInicioX = e.changedTouches[0].screenX;
+	        }, { passive: true });
+	
+	        slide.addEventListener('touchend', e => {
+	            toqueFimX = e.changedTouches[0].screenX;
+	            
+	            if (toqueInicioX - toqueFimX > limiteDiferenca) {
+	                mudarSlide('proximo');
+	            } else if (toqueFimX - toqueInicioX > limiteDiferenca) {
+	                mudarSlide('anterior');
+	            }
+	        }, { passive: true });
+	    });
 	</script>
     
 </body>
