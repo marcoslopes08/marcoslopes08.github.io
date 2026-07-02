@@ -259,37 +259,41 @@ body, html {
 
 /* Modo Responsivo - Feito pelo Gemini */
 /* ==========================================================================
-   Modo Responsivo: Ajuste Fino de Centralização e Posição do Botão Fechar
+   Modo Responsivo: Alinhamento Perfeito e Resgate do Botão Fechar
    ========================================================================== */
 @media all and (max-width: 63.938em) {
+    /* 1. Reseta o corpo para garantir centralização vertical absoluta */
     body, html {
-        overflow: hidden;
-        height: 100vh; /* Garante os 100% da altura da tela */
-        display: flex;
-        flex-direction: column;
-        justify-content: center; /* Força a centralização vertical perfeita no meio da tela */
-        align-items: center;     /* Força a centralização horizontal perfeita */
+        overflow: hidden !important;
+        height: 100vh !important;
+        width: 100vw !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important; /* Força o centro vertical real da tela */
+        align-items: center !important;     /* Força o centro horizontal real */
     }
 
-    /* 1. Frase orientadora centralizada com espaço fixo */
+    /* 2. Frase orientadora acima de tudo */
     .comentario {
-        position: relative;
-        margin-bottom: 25px; /* Espaço perfeito entre o texto e o carrossel */
-        width: 100%;
-        text-align: center;
-        padding: 0 15px;
+        position: relative !important;
+        margin-bottom: 20px !important; 
+        width: 100% !important;
+        text-align: center !important;
+        padding: 0 15px !important;
     }
 
-    /* 2. Carrossel centralizado ocupando o espaço correto na tela */
+    /* 3. Ajuste do carrossel para não esconder o botão e aceitar o touch */
     .controle-deslizante {
-        position: relative; /* Base para o botão fechar se posicionar em relação a ele */
+        position: relative !important;
         width: 95vw !important;
         height: auto !important;
-        max-height: 65vh;
-        border-radius: 12px;
-        overflow-x: auto !important; /* Ativa o toque nativo */
+        max-height: 65vh !important;
+        border-radius: 12px !important;
+        overflow-x: auto !important; /* Touch nativo liberado */
+        overflow-y: hidden !important;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
+        display: block !important;
     }
 
     .slides {
@@ -312,26 +316,27 @@ body, html {
         width: 100% !important;
         height: auto !important;
         pointer-events: auto !important;
-        user-select: none;
+        user-select: none !important;
     }
 
-    /* Esconde as bolinhas de navegação no mobile */
+    /* Esconde as bolinhas */
     .navegacao-manual, 
     .navegacao-automatica, 
     .slides input[type="radio"] {
         display: none !important;
     }
 
-    /* 3. O PULO DO GATO: Botão Fechar absoluto para não espremer o carrossel */
+    /* 4. O RETORNO DO BOTÃO: Forçado para baixo do carrossel e colado na direita */
     .fechar-pagina {
-        position: absolute !important;
-        top: calc(100% + 15px); /* Joga o botão exatamente 15px ABAIXO do carrossel */
-        right: 0 !important; /* Alinha perfeitamente com a borda direita do carrossel */
+        display: block !important;
+        position: fixed !important; /* Fixa ele na tela baseado no tamanho do visor */
+        bottom: calc(50vh - (65vh / 2) - 45px) !important; /* Calcula matematicamente o fim do carrossel */
+        right: 2.5vw !important; /* Alinha com a borda direita do carrossel (95vw) */
         margin: 0 !important;
-        z-index: 999;
+        z-index: 9999 !important;
         
-        /* Reseta travas fantasmas do flexbox */
-        bottom: auto !important;
+        /* Limpa qualquer herança que empurre o layout */
+        top: auto !important;
         left: auto !important;
         transform: none !important;
     }
