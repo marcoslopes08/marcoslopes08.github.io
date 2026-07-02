@@ -192,38 +192,51 @@
 
     <!-- JavaScript para detectar Touch Screen no Mobile, modo responsivo -->
     <!-- JavaScript para fazer o Swipe (Deslizar com o dedo) funcionar no Mobile - Feito pelo Gemini -->
-		<script>
+	<script>
 	    let toqueInicioX = 0;
 	    let toqueFimX = 0;
-	    const limiteDiferenca = 50; // Distância mínima do deslize
+	    const limiteDiferenca = 40; // Um pouco menor para facilitar o teste
 	
 	    function mudarSlide(direcao) {
 	        const radios = document.querySelectorAll('input[name="radio-botao"]');
 	        let indiceAtual = Array.from(radios).findIndex(r => r.checked);
+	        
+	        console.log("Slide atual antes do swipe:", indiceAtual);
 	
 	        if (direcao === 'proximo' && indiceAtual < radios.length - 1) {
 	            radios[indiceAtual + 1].checked = true;
+	            console.log("Mudou para o próximo:", indiceAtual + 1);
 	        } else if (direcao === 'anterior' && indiceAtual > 0) {
 	            radios[indiceAtual - 1].checked = true;
+	            console.log("Voltou para o anterior:", indiceAtual - 1);
 	        }
 	    }
 	
-	    // Aplica os ouvintes de toque em cada slide individualmente
-	    document.querySelectorAll('.slide-carrossel').forEach(slide => {
-	        slide.addEventListener('touchstart', e => {
-	            toqueInicioX = e.changedTouches[0].screenX;
+	    // Ouvinte direto no corpo do carrossel para não ter erro de elemento escondido
+	    const container = document.querySelector('.controle-deslizante');
+	    
+	    if (container) {
+	        console.log("Container do carrossel encontrado com sucesso!");
+	        
+	        container.addEventListener('touchstart', e => {
+	            toqueInicioX = e.changedTouches[0].clientX;
 	        }, { passive: true });
 	
-	        slide.addEventListener('touchend', e => {
-	            toqueFimX = e.changedTouches[0].screenX;
+	        container.addEventListener('touchend', e => {
+	            toqueFimX = e.changedTouches[0].clientX;
 	            
-	            if (toqueInicioX - toqueFimX > limiteDiferenca) {
+	            const dif = toqueInicioX - toqueFimX;
+	            console.log("Diferença do arrasto de dedo:", dif);
+	
+	            if (dif > limiteDiferenca) {
 	                mudarSlide('proximo');
-	            } else if (toqueFimX - toqueInicioX > limiteDiferenca) {
+	            } else if (dif < -limiteDiferenca) {
 	                mudarSlide('anterior');
 	            }
 	        }, { passive: true });
-	    });
+	    } else {
+	        console.log("ERRO: A classe .controle-deslizante não foi encontrada no HTML!");
+	    }
 	</script>
     
 </body>
