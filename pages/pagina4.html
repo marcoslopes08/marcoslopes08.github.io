@@ -191,14 +191,43 @@
     </script> -->
 
     <!-- JavaScript para detectar Touch Screen no Mobile, modo responsivo -->
-    <script>
-        function detectTouchDevice() {
-            return (('ontouchstart' in window) ||
-            (navigator.maxTouchPoints > 0) ||
-            (navigator.msMaxTouchPoints > 0));
-        }
-        detectTouchDevice()
-    </script>
+    <!-- JavaScript para fazer o Swipe (Deslizar com o dedo) funcionar no Mobile - Feito pelo Gemini -->
+	<script>
+	    const slider = document.querySelector('.controle-deslizante');
+	    let toqueInicioX = 0;
+	    let toqueFimX = 0;
+	
+	    // Captura onde o dedo encostou na tela
+	    slider.addEventListener('touchstart', e => {
+	        toqueInicioX = e.changedTouches[0].screenX;
+	    }, { passive: true });
+	
+	    // Captura onde o dedo saiu da tela e calcula o movimento
+	    slider.addEventListener('touchend', e => {
+	        toqueFimX = e.changedTouches[0].screenX;
+	        verificarDeslize();
+	    }, { passive: true });
+	
+	    function verificarDeslize() {
+	        const limiteDiferenca = 50; // Quantidade de pixels mínima para considerar um deslize
+	        const radios = document.querySelectorAll('input[name="radio-botao"]');
+	        let indiceAtual = Array.from(radios).findIndex(r => r.checked);
+	
+	        // Deslizou para a Esquerda (Avançar Slide)
+	        if (toqueInicioX - toqueFimX > limiteDiferenca) {
+	            if (indiceAtual < radios.length - 1) {
+	                radios[indiceAtual + 1].checked = true;
+	            }
+	        }
+	        
+	        // Deslizou para a Direita (Voltar Slide)
+	        if (toqueFimX - toqueInicioX > limiteDiferenca) {
+	            if (indiceAtual > 0) {
+	                radios[indiceAtual - 1].checked = true;
+	            }
+	        }
+	    }
+	</script>
     
 </body>
 </html>
