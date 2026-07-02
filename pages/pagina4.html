@@ -193,37 +193,38 @@
     <!-- JavaScript para detectar Touch Screen no Mobile, modo responsivo -->
     <!-- JavaScript para fazer o Swipe (Deslizar com o dedo) funcionar no Mobile - Feito pelo Gemini -->
 	<script>
-	    let toqueInicioX = 0;
-	    let toqueFimX = 0;
-	    const limiteDiferenca = 40; 
+	    // Executa apenas quando a página carregar
+	    window.addEventListener('DOMContentLoaded', () => {
+	        // Detecta se é celular ou tablet
+	        if (window.innerWidth <= 768) {
+	            
+	            // Cria a zona da Esquerda (Voltar)
+	            const zonaEsquerda = document.createElement('div');
+	            zonaEsquerda.style.cssText = 'position:fixed; top:15%; left:0; width:15%; height:60%; z-index:9999; background:transparent;';
+	            
+	            // Cria a zona da Direita (Avançar)
+	            const zonaDireita = document.createElement('div');
+	            zonaDireita.style.cssText = 'position:fixed; top:15%; right:0; width:15%; height:60%; z-index:9999; background:transparent;';
+	            
+	            document.body.appendChild(zonaEsquerda);
+	            document.body.appendChild(zonaDireita);
 	
-	    function mudarSlide(direcao) {
-	        const radios = document.querySelectorAll('input[name="radio-botao"]');
-	        let indiceAtual = Array.from(radios).findIndex(r => r.checked);
+	            function navegar(direcao) {
+	                const radios = document.querySelectorAll('input[name="radio-botao"]');
+	                let indiceAtual = Array.from(radios).findIndex(r => r.checked);
 	
-	        if (direcao === 'proximo' && indiceAtual < radios.length - 1) {
-	            radios[indiceAtual + 1].checked = true;
-	        } else if (direcao === 'anterior' && indiceAtual > 0) {
-	            radios[indiceAtual - 1].checked = true;
+	                if (direcao === 'proximo' && indiceAtual < radios.length - 1) {
+	                    radios[indiceAtual + 1].checked = true;
+	                } else if (direcao === 'anterior' && indiceAtual > 0) {
+	                    radios[indiceAtual - 1].checked = true;
+	                }
+	            }
+	
+	            // Atribui os cliques/toques nas laterais da tela
+	            zonaEsquerda.addEventListener('touchstart', (e) => { e.preventDefault(); navegar('anterior'); });
+	            zonaDireita.addEventListener('touchstart', (e) => { e.preventDefault(); navegar('proximo'); });
 	        }
-	    }
-	
-	    // O truque máximo: ouvir o toque na janela inteira (window)
-	    window.addEventListener('touchstart', e => {
-	        toqueInicioX = e.changedTouches[0].clientX;
-	    }, { passive: true });
-	
-	    window.addEventListener('touchend', e => {
-	        toqueFimX = e.changedTouches[0].clientX;
-	        
-	        const dif = toqueInicioX - toqueFimX;
-	
-	        if (dif > limiteDiferenca) {
-	            mudarSlide('proximo');
-	        } else if (dif < -limiteDiferenca) {
-	            mudarSlide('anterior');
-	        }
-	    }, { passive: true });
+	    });
 	</script>
     
 </body>
