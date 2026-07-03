@@ -259,37 +259,36 @@ body, html {
 
 /* Modo Responsivo - Feito pelo Gemini */
 /* ==========================================================================
-   Modo Responsivo: Alinhamento Perfeito e Resgate do Botão Fechar
+   Modo Responsivo: Ajuste Fino do Espaçamento do Botão Fechar
    ========================================================================== */
 @media all and (max-width: 63.938em) {
-    /* 1. Reseta o corpo para garantir centralização vertical absoluta */
     body, html {
         overflow: hidden !important;
         height: 100vh !important;
         width: 100vw !important;
         display: flex !important;
         flex-direction: column !important;
-        justify-content: center !important; /* Força o centro vertical real da tela */
-        align-items: center !important;     /* Força o centro horizontal real */
+        justify-content: center !important; /* Centraliza o bloco todo no meio da tela */
+        align-items: center !important;
     }
 
-    /* 2. Frase orientadora acima de tudo */
+    /* 1. Frase orientadora */
     .comentario {
         position: relative !important;
-        margin-bottom: 20px !important; 
+        margin-bottom: 15px !important; /* Espaço controlado acima do carrossel */
         width: 100% !important;
         text-align: center !important;
         padding: 0 15px !important;
     }
 
-    /* 3. Ajuste do carrossel para não esconder o botão e aceitar o touch */
+    /* 2. Janela do carrossel */
     .controle-deslizante {
         position: relative !important;
         width: 95vw !important;
         height: auto !important;
         max-height: 65vh !important;
         border-radius: 12px !important;
-        overflow-x: auto !important; /* Touch nativo liberado */
+        overflow-x: auto !important; /* Touch nativo */
         overflow-y: hidden !important;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
@@ -326,16 +325,17 @@ body, html {
         display: none !important;
     }
 
-    /* 4. O RETORNO DO BOTÃO: Forçado para baixo do carrossel e colado na direita */
+    /* 3. Ajuste do Botão: Grudado na imagem e alinhado à direita */
     .fechar-pagina {
         display: block !important;
-        position: fixed !important; /* Fixa ele na tela baseado no tamanho do visor */
-        bottom: calc(50vh - (65vh / 2) - 45px) !important; /* Calcula matematicamente o fim do carrossel */
-        right: 2.5vw !important; /* Alinha com a borda direita do carrossel (95vw) */
-        margin: 0 !important;
+        position: relative !important; /* Volta para o fluxo normal, abaixo da imagem */
+        margin-top: 15px !important;  /* Espaço perfeito e fixo de 15px logo abaixo da foto */
+        margin-left: auto !important;  /* Truque: empurra o botão totalmente para a direita */
+        margin-right: 2.5vw !important; /* Alinha com a borda direita do carrossel (95vw) */
         z-index: 9999 !important;
         
-        /* Limpa qualquer herança que empurre o layout */
+        /* Limpa os antigos posicionamentos fixos */
+        bottom: auto !important;
         top: auto !important;
         left: auto !important;
         transform: none !important;
