@@ -264,154 +264,7 @@ body, html {
 
 /* Modo Responsivo - Feito pelo Gemini */
 /* ==========================================================================
-   CSS Carrossel - Site Fundo Preto - Página 4 - Certificados (Marcos N. Lopes)
-   ========================================================================== */
-
-/* Esconde o texto do celular quando a página for aberta no computador */
-.texto-mobile {
-    display: none;
-}
-
-* {
-    padding: 0; 
-    margin: 0; 
-    box-sizing: border-box; 
-}
-
-body, html {
-    margin: 0; 
-    padding: 0; 
-    height: 100vh; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center; 
-    background: #191919; 
-    overflow: hidden; 
-}
- 
-.controle-deslizante { 
-    width: 800px; 
-    height: 500px; 
-    border-radius: 20px; 
-    overflow: hidden; 
-}
- 
-.slides { 
-    width: 500%; 
-    height: 500px; 
-    display: flex; 
-}
- 
-.slides input { 
-    display: none; 
-}
-   
-.slide-carrossel { 
-    width: 20%; 
-    transition: 1s; 
-}
- 
-.slide-carrossel img { 
-    width: 800px; 
-    height: 500px; 
-    pointer-events: none; 
-    user-select: none; 
-}
-  
-/* CSS para navegação manual dos slides */
-.navegacao-manual { 
-    position: absolute; 
-    width: 800px; 
-    margin-top: 20px; 
-    display: flex; 
-    justify-content: center; 
-}
-  
-.manual-botao { 
-    border: 0px solid rgba(255, 204, 255,.1); 
-    padding: 12px; 
-    border-radius: 50px; 
-    cursor: pointer; 
-    transition: 0.3s; 
-    background-color: rgba(255, 204, 255,.1); 
-}
-  
-.manual-botao:not(:last-child) { 
-    margin-right: 15px; 
-}
-  
-.manual-botao:hover { 
-    background: #f9004d; 
-}
- 
-/* IDs de navegação por rádio para o PC */
-#radio1:checked ~ .first { margin-left: 0; }
-#radio2:checked ~ .first { margin-left: -20%; }
-#radio3:checked ~ .first { margin-left: -40%; }
-#radio4:checked ~ .first { margin-left: -60%; }
-#radio5:checked ~ .first { margin-left: -80%; }
-#radio6:checked ~ .first { margin-left: -100%; }
-#radio7:checked ~ .first { margin-left: -120%; }
-#radio8:checked ~ .first { margin-left: -140%; }
-#radio9:checked ~ .first { margin-left: -160%; }
-#radio10:checked ~ .first { margin-left: -180%; }
-#radio11:checked ~ .first { margin-left: -200%; }
-#radio12:checked ~ .first { margin-left: -220%; }
-#radio13:checked ~ .first { margin-left: -240%; }
-#radio14:checked ~ .first { margin-left: -260%; }
-#radio15:checked ~ .first { margin-left: -280%; }
-#radio16:checked ~ .first { margin-left: -300%; }
-#radio17:checked ~ .first { margin-left: -320%; }
-#radio18:checked ~ .first { margin-left: -340%; }
-
-/* CSS para navegação automática */
-.navegacao-automatica { 
-    position: absolute; 
-    display: flex; 
-    width: 800px;  
-    justify-content: center; 
-    margin-top: 520px; 
-}
-  
-.navegacao-automatica div { 
-    border: 0px solid rgba(255, 204, 255,.1); 
-    padding: 12px; 
-    border-radius: 50px; 
-    transition: 1s; 
-    background-color: rgba(255, 204, 255,.1); 
-}
-  
-.navegacao-automatica div:not(:last-child) { 
-    margin-right: 15px; 
-}
-
-#radio1:checked ~ .navegacao-automatica .auto-botao1 { background: #f9004d; }
-#radio2:checked ~ .navegacao-automatica .auto-botao2 { background: #f9004d; }
-#radio3:checked ~ .navegacao-automatica .auto-botao3 { background: #f9004d; }
-#radio4:checked ~ .navegacao-automatica .auto-botao4 { background: #f9004d; }
-#radio5:checked ~ .navegacao-automatica .auto-botao5 { background: #f9004d; }
-#radio6:checked ~ .navegacao-automatica .auto-botao6 { background: #f9004d; }
-#radio7:checked ~ .navegacao-automatica .auto-botao7 { background: #f9004d; }
-#radio8:checked ~ .navegacao-automatica .auto-botao8 { background: #f9004d; }
-#radio9:checked ~ .navegacao-automatica .auto-botao9 { background: #f9004d; }
-#radio10:checked ~ .navegacao-automatica .auto-botao10 { background: #f9004d; }
-#radio11:checked ~ .navegacao-automatica .auto-botao11 { background: #f9004d; }
-#radio12:checked ~ .navegacao-automatica .auto-botao12 { background: #f9004d; }
-#radio13:checked ~ .navegacao-automatica .auto-botao13 { background: #f9004d; }
-#radio14:checked ~ .navegacao-automatica .auto-botao14 { background: #f9004d; }
-#radio15:checked ~ .navegacao-automatica .auto-botao15 { background: #f9004d; }
-#radio16:checked ~ .navegacao-automatica .auto-botao16 { background: #f9004d; }
-#radio17:checked ~ .navegacao-automatica .auto-botao17 { background: #f9004d; }
-#radio18:checked ~ .navegacao-automatica .auto-botao18 { background: #f9004d; }
-
-.fechar-pagina { 
-    position: absolute; 
-    margin-left: 1120px; 
-    margin-top: 560px; 
-}
-
-/* ==========================================================================
-   Modo Responsivo: Correção Definitiva do Efeito em "V" na Transição
+   Modo Responsivo: Acabamento Perfeito Antivazamento nas Bordas Inferiores
    ========================================================================== */
 @media all and (max-width: 63.938em) {
     body, html {
@@ -430,7 +283,7 @@ body, html {
     .comentario {
         position: relative !important;
         margin-top: 0 !important;
-        margin-bottom: 30px !important; /* era 50px */
+        margin-bottom: 50px !important; 
         width: 100% !important;
         text-align: center !important;
         padding: 0 30px !important;
@@ -444,13 +297,13 @@ body, html {
         display: block !important;
     }
     
-    /* 2. CERTIFICADOS (A Moldura que Arredonda Tudo) */
+    /* 2. CERTIFICADOS (Container) */
     .controle-deslizante {
         position: relative !important;
         width: 95vw !important;
         height: auto !important;
         max-height: 60vh !important;
-        border-radius: 20px !important; /* Apenas o container segura os 20px */
+        border-radius: 20px !important; /* A moldura externa segura os 20px de arredondamento */
         overflow-x: auto !important; 
         overflow-y: hidden !important;
         scroll-snap-type: x mandatory !important;
@@ -458,7 +311,7 @@ body, html {
         display: block !important;
         margin: 0 auto !important;
 
-        /* Máscaras de hardware que forçam o corte perfeito nas bordas externas do container */
+        /* TRUQUES ANTIVAZAMENTO: Força o navegador do celular a cortar as pontas fantasmas */
         -webkit-mask-image: -webkit-radial-gradient(white, black); 
         mask-image: radial-gradient(white, black);
         isolation: isolate !important; 
@@ -470,12 +323,12 @@ body, html {
         display: flex !important;
     }
 
-    /* MATANDO O "V": Remove o arredondamento interno para emendar as fotos perfeitamente */
+    /* MATANDO O "V": Remove o arredondamento interno das caixas dos slides no mobile */
     .slide-carrossel {
         flex: 0 0 100% !important;
         width: 100% !important;
         scroll-snap-align: start !important;
-        border-radius: 0 !important; /* Removido os 20px daqui */
+        border-radius: 0 !important; /* Mudado para 0 para eliminar o vão entre as fotos */
         overflow: visible !important;
     }
 
@@ -483,11 +336,11 @@ body, html {
         margin-left: 0 !important;
     }
 
-    /* As imagens voltam a ter cantos retos na emenda, eliminando o vão */
+    /* MATANDO O "V": Remove o arredondamento direto da imagem, deixando os cantos retos na emenda */
     .slide-carrossel img {
         width: 100% !important;
         height: auto !important;
-        border-radius: 0 !important; /* Removido os 20px daqui */
+        border-radius: 0 !important; /* Mudado para 0 para a transição ficar lisa e reta */
         display: block !important; 
         pointer-events: auto !important;
         user-select: none !important;
