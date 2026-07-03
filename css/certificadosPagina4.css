@@ -259,10 +259,10 @@ body, html {
 
 /* Modo Responsivo - Feito pelo Gemini */
 /* ==========================================================================
-   Modo Responsivo: Regras do Marcos + Centralização Vertical Absoluta
+   Modo Responsivo: Empilhamento Correto e Centralização Garantida
    ========================================================================== */
 @media all and (max-width: 63.938em) {
-    /* Força o corpo da página a ocupar a tela inteira como uma moldura fixa */
+    /* Força o corpo da página a empilhar os elementos verticalmente e centralizar no meio da tela */
     body, html {
         overflow: hidden !important;
         height: 100vh !important;
@@ -270,28 +270,29 @@ body, html {
         margin: 0 !important;
         padding: 0 !important;
         display: flex !important;
-        justify-content: center !important; /* Centro horizontal */
-        align-items: center !important;     /* Centro vertical real da tela */
+        flex-direction: column !important; /* ISSO CORRIGE O EMPILHAMENTO (1, 2, 3) */
+        justify-content: center !important; /* Centraliza verticalmente o bloco todo na tela */
+        align-items: center !important;     /* Centraliza horizontalmente */
     }
 
-    /* 1. REGRA 2: Frase orientadora com padding de 30px */
+    /* 1. TEXTO: No topo do bloco, com padding de 30px */
     .comentario {
         position: relative !important;
         margin-top: 0 !important;
         margin-bottom: 20px !important; 
         width: 100% !important;
         text-align: center !important;
-        padding: 0 30px !important; /* Aplicada regra de 30px */
+        padding: 0 30px !important; /* Regra de 30px mantida */
     }
 
-    /* 2. REGRA 1: Janela do carrossel com border-radius de 20px */
+    /* 2. CERTIFICADOS: No meio do bloco, com border-radius de 20px */
     .controle-deslizante {
         position: relative !important;
         width: 95vw !important;
         height: auto !important;
         max-height: 60vh !important;
-        border-radius: 20px !important; /* Aplicada regra de 20px */
-        overflow-x: auto !important; /* Touch nativo */
+        border-radius: 20px !important; /* Regra de 20px mantida */
+        overflow-x: auto !important; /* Touch nativo liberado */
         overflow-y: hidden !important;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
@@ -322,21 +323,22 @@ body, html {
         user-select: none !important;
     }
 
-    /* Esconde as bolinhas */
+    /* Garante que as bolinhas continuem escondidas */
     .navegacao-manual, 
     .navegacao-automatica, 
     .slides input[type="radio"] {
         display: none !important;
     }
 
-    /* 3. REGRA 3: Botão Fechar com margin-top de 30px */
+    /* 3. BOTÃO FECHAR: Embaixo do bloco, com margin-top de 30px e alinhado à direita */
     .fechar-pagina {
         display: block !important;
         position: relative !important;
-        margin-top: 30px !important;   /* Aplicada regra de 30px */
-        margin-left: auto !important;   /* Alinha na direita */
+        margin-top: 30px !important;   /* Regra de 30px mantida */
+        margin-left: auto !important;   /* Empurra o botão para a direita */
         margin-right: 2.5vw !important; /* Alinha com a borda do carrossel */
-        z-index: 9999 !important;        
+        z-index: 9999 !important;
+        
         bottom: auto !important;
         top: auto !important;
         left: auto !important;
