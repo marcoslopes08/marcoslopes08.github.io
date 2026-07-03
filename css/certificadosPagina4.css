@@ -1,5 +1,10 @@
 /* CSS Carrossel - Site Fundo Preto - Página 4 - Certificados */
 
+/* Esconde o texto do celular quando a página for aberta no computador */
+.texto-mobile {
+    display: none;
+}
+
 *{
 	padding: 0; /* zera todos os espaços dentro da Tela */
 	margin: 0; /* zera todas as margens */
@@ -284,6 +289,18 @@ body, html {
         padding: 0 30px !important;
     }
 
+	/* Esconde o texto do PC quando estiver no celular */
+	/* Troca a frase "Navegue pelos certificados clicando nos botões abaixo por:
+	Para ver os certificados, arraste para os lado */
+    .texto-pc {
+        display: none !important;
+    }
+
+    /* Faz a frase: Para ver os certificados, arraste para os lado - aparecer na no celular */
+    .texto-mobile {
+        display: block !important;
+    }
+	
     /* 2. CERTIFICADOS (Container) */
     .controle-deslizante {
         position: relative !important;
