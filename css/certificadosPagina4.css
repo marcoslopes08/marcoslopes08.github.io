@@ -259,10 +259,9 @@ body, html {
 
 /* Modo Responsivo - Feito pelo Gemini */
 /* ==========================================================================
-   Modo Responsivo: Empilhamento Correto e Centralização Garantida
+   Modo Responsivo: Acabamento Perfeito Antivazamento nas Bordas Inferiores
    ========================================================================== */
 @media all and (max-width: 63.938em) {
-    /* Força o corpo da página a empilhar os elementos verticalmente e centralizar no meio da tela */
     body, html {
         overflow: hidden !important;
         height: 100vh !important;
@@ -270,34 +269,39 @@ body, html {
         margin: 0 !important;
         padding: 0 !important;
         display: flex !important;
-        flex-direction: column !important; /* ISSO CORRIGE O EMPILHAMENTO (1, 2, 3) */
-        justify-content: center !important; /* Centraliza verticalmente o bloco todo na tela */
-        align-items: center !important;     /* Centraliza horizontalmente */
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
 
-    /* 1. TEXTO: No topo do bloco, com padding de 30px */
+    /* 1. TEXTO */
     .comentario {
         position: relative !important;
         margin-top: 0 !important;
-        margin-bottom: 20px !important; 
+        margin-bottom: 50px !important; /* era 20px */
         width: 100% !important;
         text-align: center !important;
-        padding: 0 30px !important; /* Regra de 30px mantida */
+        padding: 0 30px !important;
     }
 
-    /* 2. CERTIFICADOS: No meio do bloco, com border-radius de 20px */
+    /* 2. CERTIFICADOS (Container) */
     .controle-deslizante {
         position: relative !important;
         width: 95vw !important;
         height: auto !important;
         max-height: 60vh !important;
-        border-radius: 20px !important; /* Regra de 20px mantida */
-        overflow-x: auto !important; /* Touch nativo liberado */
+        border-radius: 20px !important; /* Regra de 20px absoluta */
+        overflow-x: auto !important; 
         overflow-y: hidden !important;
         scroll-snap-type: x mandatory !important;
         -webkit-overflow-scrolling: touch !important;
         display: block !important;
         margin: 0 auto !important;
+
+        /* TRUQUES ANTIVAZAMENTO: Força o navegador do celular a cortar as pontas fantasmas */
+        -webkit-mask-image: -webkit-radial-gradient(white, black); /* Força o Webkit a respeitar o clipping */
+        mask-image: radial-gradient(white, black);
+        isolation: isolate !important; /* Cria um novo contexto de renderização isolado */
     }
 
     .slides {
@@ -310,33 +314,38 @@ body, html {
         flex: 0 0 100% !important;
         width: 100% !important;
         scroll-snap-align: start !important;
+        border-radius: 20px !important; /* Garante o desenho no bloco interno */
+        overflow: hidden !important;
     }
 
     .slide-carrossel.first {
         margin-left: 0 !important;
     }
 
+    /* Força o arredondamento na imagem e remove rebarbas de renderização */
     .slide-carrossel img {
         width: 100% !important;
         height: auto !important;
+        border-radius: 20px !important; /* Aplica o raio na imagem */
+        display: block !important; /* Remove espaçamento fantasma de linha de texto na base da imagem */
         pointer-events: auto !important;
         user-select: none !important;
     }
 
-    /* Garante que as bolinhas continuem escondidas */
+    /* Esconde as bolinhas */
     .navegacao-manual, 
     .navegacao-automatica, 
     .slides input[type="radio"] {
         display: none !important;
     }
 
-    /* 3. BOTÃO FECHAR: Embaixo do bloco, com margin-top de 30px e alinhado à direita */
+    /* 3. BOTÃO FECHAR */
     .fechar-pagina {
         display: block !important;
         position: relative !important;
-        margin-top: 30px !important;   /* Regra de 30px mantida */
-        margin-left: auto !important;   /* Empurra o botão para a direita */
-        margin-right: 2.5vw !important; /* Alinha com a borda do carrossel */
+        margin-top: 30px !important; 
+        margin-left: auto !important; 
+        margin-right: 2.5vw !important; 
         z-index: 9999 !important;
         
         bottom: auto !important;
