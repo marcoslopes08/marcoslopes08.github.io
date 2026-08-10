@@ -1,9 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-	<!-- Força ao Imgbox e Imgur a exibir imagens, independente do bloqueio dos sites -->
-	<meta name="referrer" content="no-referrer">
-  
 	<title>Portfólio</title>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -579,6 +576,19 @@
 
 	<!-- Troca a cor da Letras em (Marcos Lopes, Sobre Mim, Habilidades, Diferenciais, Projetos) -->
 	<script src="java/trocaCor.js"></script>
+
+	<!-- Serviço gratuito baixa e desbloqueia as imagens do Imgbox/Imgur - Feito pelo Gemini -->
+	<!-- Força ao Imgbox e Imgur a exibir imagens, independente do bloqueio dos sites -->
+	<script>
+	  document.addEventListener("DOMContentLoaded", () => {
+	    document.querySelectorAll("img").forEach(img => {
+	      // Se a imagem for do Imgbox ou Imgur, redireciona pelo proxy
+	      if (img.src.includes("imgbox.com") || img.src.includes("imgur.com")) {
+	        img.src = "https://images.weserv.nl/?url=" + encodeURIComponent(img.src);
+	      }
+	    });
+	  });
+	</script>
 
 </body>
 </html>
