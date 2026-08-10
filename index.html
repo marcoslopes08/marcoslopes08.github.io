@@ -581,20 +581,14 @@
 	<script>
 	  document.addEventListener("DOMContentLoaded", () => {
 	    document.querySelectorAll("img").forEach(img => {
-	      let src = img.src;
+	      let src = img.getAttribute("src") || img.src;
 	
 	      if (src && src.includes("imgbox.com")) {
-	        // 1. Converte o link do Thumbnail (_t.png ou _t.jpg) para a Imagem Original
-	        src = src.replace("thumbs2.imgbox.com", "images2.imgbox.com")
-	                 .replace("_t.", ".");
-	
-	        // 2. Garante o protocolo https://
-	        if (src.startsWith("//")) {
-	          src = "https:" + src;
-	        }
-	
-	        // 3. Aplica o proxy do Google para contornar o bloqueio do Imgbox no GitHub Pages
-	        img.src = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=" + encodeURIComponent(src);
+	        // Remove 'thumbs2' e vira 'images2', e tira o '_t' da extensão
+	        let novaUrl = src.replace("thumbs2.imgbox.com", "images2.imgbox.com")
+	                         .replace("_t.", ".");
+	        
+	        img.src = novaUrl;
 	      }
 	    });
 	  });
