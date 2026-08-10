@@ -585,13 +585,13 @@
 	      let srcOriginal = img.src;
 	
 	      if (srcOriginal && (srcOriginal.includes("imgbox.com") || srcOriginal.includes("imgur.com"))) {
-	        // Garante protocolo https://
+	        // Garante protocolo https:// correto
 	        if (srcOriginal.startsWith("//")) {
 	          srcOriginal = "https:" + srcOriginal;
 	        }
 	
-	        // Usa o proxy AllOrigins (gratuito para sites públicos)
-	        img.src = "https://api.allorigins.win/raw?url=" + encodeURIComponent(srcOriginal);
+	        // Usa a CDN/Proxy do Google para bypassar o bloqueio do Imgbox/Imgur
+	        img.src = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=" + encodeURIComponent(srcOriginal);
 	      }
 	    });
 	  });
