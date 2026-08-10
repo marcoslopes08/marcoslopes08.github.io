@@ -582,25 +582,21 @@
 	<script>
 	  document.addEventListener("DOMContentLoaded", () => {
 	    document.querySelectorAll("img").forEach(img => {
-	      // Pega a URL completa da imagem
-	      let srcOriginal = img.src; 
+	      let srcOriginal = img.src;
 	
 	      if (srcOriginal && (srcOriginal.includes("imgbox.com") || srcOriginal.includes("imgur.com"))) {
-	        
-	        // Garante que o link comece obrigatoriamente com https://
+	        // Garante protocolo https://
 	        if (srcOriginal.startsWith("//")) {
 	          srcOriginal = "https:" + srcOriginal;
-	        } else if (!srcOriginal.startsWith("http")) {
-	          srcOriginal = "https://" + srcOriginal;
 	        }
 	
-	        // Aplica o Corsproxy formatando o cabeçalho
-	        img.src = "https://corsproxy.io/?" + encodeURIComponent(srcOriginal);
+	        // Usa o proxy AllOrigins (gratuito para sites públicos)
+	        img.src = "https://api.allorigins.win/raw?url=" + encodeURIComponent(srcOriginal);
 	      }
 	    });
 	  });
 	</script>
-
+	
 </body>
 </html>
 
