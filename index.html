@@ -576,26 +576,6 @@
 
 	<!-- Troca a cor da Letras em (Marcos Lopes, Sobre Mim, Habilidades, Diferenciais, Projetos) -->
 	<script src="java/trocaCor.js"></script>
-
-	<!-- Serviço gratuito baixa e desbloqueia as imagens do Imgbox/Imgur - Feito pelo Gemini -->
-	<!-- Força ao Imgbox e Imgur a exibir imagens, independente do bloqueio dos sites -->
-	<script>
-	  document.addEventListener("DOMContentLoaded", () => {
-	    document.querySelectorAll("img").forEach(img => {
-	      let srcOriginal = img.src;
-	
-	      if (srcOriginal && (srcOriginal.includes("imgbox.com") || srcOriginal.includes("imgur.com"))) {
-	        // Garante protocolo https:// correto
-	        if (srcOriginal.startsWith("//")) {
-	          srcOriginal = "https:" + srcOriginal;
-	        }
-	
-	        // Usa a CDN/Proxy do Google para bypassar o bloqueio do Imgbox/Imgur
-	        img.src = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=" + encodeURIComponent(srcOriginal);
-	      }
-	    });
-	  });
-	</script>
 	
 </body>
 </html>
