@@ -582,8 +582,19 @@
 	<script>
 	  document.addEventListener("DOMContentLoaded", () => {
 	    document.querySelectorAll("img").forEach(img => {
-	      let srcOriginal = img.getAttribute("src");
+	      // Pega a URL completa da imagem
+	      let srcOriginal = img.src; 
+	
 	      if (srcOriginal && (srcOriginal.includes("imgbox.com") || srcOriginal.includes("imgur.com"))) {
+	        
+	        // Garante que o link comece obrigatoriamente com https://
+	        if (srcOriginal.startsWith("//")) {
+	          srcOriginal = "https:" + srcOriginal;
+	        } else if (!srcOriginal.startsWith("http")) {
+	          srcOriginal = "https://" + srcOriginal;
+	        }
+	
+	        // Aplica o Corsproxy formatando o cabeçalho
 	        img.src = "https://corsproxy.io/?" + encodeURIComponent(srcOriginal);
 	      }
 	    });
