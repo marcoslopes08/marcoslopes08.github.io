@@ -576,6 +576,29 @@
 
 	<!-- Troca a cor da Letras em (Marcos Lopes, Sobre Mim, Habilidades, Diferenciais, Projetos) -->
 	<script src="java/trocaCor.js"></script>
+
+	<!-- Evita quea as imagens no ImgBox e Imgur sejam bloqueadas/quebradas - Feito pelo Gemini -->
+	<script>
+	  document.addEventListener("DOMContentLoaded", () => {
+	    document.querySelectorAll("img").forEach(img => {
+	      let src = img.src;
+	
+	      if (src && src.includes("imgbox.com")) {
+	        // 1. Converte o link do Thumbnail (_t.png ou _t.jpg) para a Imagem Original
+	        src = src.replace("thumbs2.imgbox.com", "images2.imgbox.com")
+	                 .replace("_t.", ".");
+	
+	        // 2. Garante o protocolo https://
+	        if (src.startsWith("//")) {
+	          src = "https:" + src;
+	        }
+	
+	        // 3. Aplica o proxy do Google para contornar o bloqueio do Imgbox no GitHub Pages
+	        img.src = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy?container=focus&refresh=2592000&url=" + encodeURIComponent(src);
+	      }
+	    });
+	  });
+	</script>
 	
 </body>
 </html>
