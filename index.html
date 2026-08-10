@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+	<!-- 1. ADICIONE ESTA LINHA NO HEAD (Anula o bloqueio de hotlink do Imgbox) -->
+  	<meta name="referrer" content="no-referrer">
+	
 	<title>Portfólio</title>
 
 	<link rel="preconnect" href="https://fonts.gstatic.com">
@@ -579,21 +582,21 @@
 
 	<!-- Evita quea as imagens no ImgBox e Imgur sejam bloqueadas/quebradas - Feito pelo Gemini -->
 	<script>
-	  document.addEventListener("DOMContentLoaded", () => {
-	    document.querySelectorAll("img").forEach(img => {
-	      let src = img.getAttribute("src") || img.src;
+	    document.addEventListener("DOMContentLoaded", () => {
+	      document.querySelectorAll("img").forEach(img => {
+	        let src = img.getAttribute("src") || img.src;
 	
-	      if (src && src.includes("imgbox.com")) {
-	        // 1. Troca 'thumbs2' (ou qualquer 'thumbs') por 'images2'
-	        // 2. Remove o sufixo '_t.' mantendo a extensão original (.png, .jpg, etc.)
-	        let urlOriginal = src.replace(/thumbs\d*\.imgbox\.com/, "images2.imgbox.com")
-	                             .replace(/_t\.(png|jpg|jpeg|gif|webp)/i, ".$1");
-	        
-	        // Aplica o link correto da imagem em alta qualidade
-	        img.src = urlOriginal;
-	      }
+	        if (src && src.includes("imgbox.com")) {
+	          // Garante o bloqueio de referrer na imagem e ajusta para a URL original intacta
+	          img.setAttribute("referrerpolicy", "no-referrer");
+	          
+	          let urlOriginal = src.replace(/thumbs\d*\.imgbox\.com/, "images2.imgbox.com")
+	                               .replace(/_t\.(png|jpg|jpeg|gif|webp)/i, ".$1");
+	
+	          img.src = urlOriginal;
+	        }
+	      });
 	    });
-	  });
 	</script>
 	
 </body>
